@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Ctext y=%2714%27 font-size=%2714%27%3E%F0%9F%8E%BE%3C/text%3E%3C/svg%3E">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}</style>
+</head>
+<body>
+<title>Ashe Night Session</title>
+<style>
+  :root{
+    --ground:#EEF2F8;
+    --surface:#FFFFFF;
+    --surface-2:#F6F8FC;
+    --ink:#0A1B33;
+    --ink-soft:#3D5170;
+    --muted:#6B7C99;
+    --line:#D8E0EC;
+    --court:#1E5AA8;
+    --court-soft:#E3ECF9;
+    --ball:#8A9E00;
+    --ball-mark:#C8E600;
+    --loge:#1E5AA8;
+    --cs:#C2610A;
+    --grid:#E6EBF3;
+    --drop-ink:#1B5E20;
+    --drop-bg:#DCF3DD;
+    --drop-line:#7FC684;
+    --rise-ink:#7A2015;
+    --rise-bg:#FBE0DB;
+    --shadow:0 1px 2px rgba(10,27,51,.06),0 8px 24px rgba(10,27,51,.05);
+    --radius:10px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#071426;
+      --surface:#0E2440;
+      --surface-2:#132C4D;
+      --ink:#EAF1FA;
+      --ink-soft:#B4C6DE;
+      --muted:#7F94B3;
+      --line:#1E3A5F;
+      --court:#6BA3E8;
+      --court-soft:#152F52;
+      --ball:#C8E600;
+      --ball-mark:#C8E600;
+      --loge:#5C97DE;
+      --cs:#C77B3A;
+      --grid:#1A3459;
+      --drop-ink:#A8E6AC;
+      --drop-bg:#153A1B;
+      --drop-line:#2E6B35;
+      --rise-ink:#F5B8AC;
+      --rise-bg:#42160F;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#071426;
+    --surface:#0E2440;
+    --surface-2:#132C4D;
+    --ink:#EAF1FA;
+    --ink-soft:#B4C6DE;
+    --muted:#7F94B3;
+    --line:#1E3A5F;
+    --court:#6BA3E8;
+    --court-soft:#152F52;
+    --ball:#C8E600;
+    --ball-mark:#C8E600;
+    --loge:#5C97DE;
+    --cs:#C77B3A;
+    --grid:#1A3459;
+    --drop-ink:#A8E6AC;
+    --drop-bg:#153A1B;
+    --drop-line:#2E6B35;
+    --rise-ink:#F5B8AC;
+    --rise-bg:#42160F;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);
+  }
+
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:32px 20px 64px;display:flex;flex-direction:column;gap:32px;}
+
+  .serif{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;}
+
+  /* ---- masthead ---- */
+  .masthead{display:flex;flex-direction:column;gap:6px;}
+  .eyebrow{
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--court);font-weight:650;
+  }
+  h1{font-size:clamp(28px,5vw,40px);line-height:1.08;margin:0;text-wrap:balance;font-weight:600;letter-spacing:-.01em;}
+  .sub{color:var(--muted);font-size:14px;}
+  .rule{height:3px;background:var(--court);border-radius:2px;margin-top:10px;}
+  .rule span{display:block;height:3px;width:64px;background:var(--ball-mark);border-radius:2px;}
+
+  .stamp{
+    display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+    margin-top:12px;background:var(--surface);border:1px solid var(--line);
+    border-radius:20px;padding:6px 14px;font-size:12.5px;box-shadow:var(--shadow);
+  }
+  .stamp .dot{width:7px;height:7px;border-radius:50%;background:var(--ball);flex:none;}
+  .stamp .lbl{color:var(--muted);}
+  .stamp .val{font-weight:650;font-variant-numeric:tabular-nums;}
+
+  /* ---- drop banner ---- */
+  .banner{
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+    background:var(--drop-bg);border:1px solid var(--drop-line);
+    border-radius:var(--radius);padding:14px 18px;
+  }
+  .banner .tag{
+    font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    font-weight:700;color:var(--drop-ink);
+  }
+  .banner .msg{font-size:14px;color:var(--drop-ink);}
+  .banner .msg b{font-variant-numeric:tabular-nums;}
+  .banner.calm{background:var(--surface-2);border-color:var(--line);}
+  .banner.calm .tag{color:var(--muted);}
+  .banner.calm .msg{color:var(--ink-soft);}
+
+  /* ---- summary tiles ---- */
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;}
+  .tile{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:4px;
+  }
+  .tile .label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;}
+  .tile .figure{font-size:30px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
+  .tile .where{font-size:13px;color:var(--ink-soft);}
+  .tile.mark{border-left:3px solid var(--ball-mark);}
+  .tile.moved{border-left:3px solid var(--drop-line);}
+
+  /* ---- sections ---- */
+  section{display:flex;flex-direction:column;gap:12px;}
+  .head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:8px;}
+  h2{font-size:17px;margin:0;font-weight:600;letter-spacing:-.01em;}
+  .head .note{font-size:12px;color:var(--muted);}
+
+  .rows{display:flex;flex-direction:column;gap:8px;}
+  a.row{
+    display:grid;
+    grid-template-columns:1fr auto auto;
+    align-items:center;gap:16px;
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:14px 16px;text-decoration:none;color:inherit;box-shadow:var(--shadow);
+    transition:border-color .15s ease,transform .15s ease,background .15s ease;
+  }
+  a.row:hover{border-color:var(--court);background:var(--surface-2);transform:translateY(-1px);}
+  a.row:focus-visible{outline:2px solid var(--court);outline-offset:2px;}
+  a.row.best{border-left:3px solid var(--ball-mark);}
+  a.row.new{border-left:3px solid var(--drop-line);}
+
+  .seat{display:flex;flex-direction:column;gap:2px;min-width:0;}
+  .seat .id{font-size:16px;font-weight:600;letter-spacing:-.01em;}
+  .seat .id em{font-style:normal;color:var(--muted);font-weight:500;}
+  .seat .notes{font-size:12.5px;color:var(--muted);overflow-wrap:anywhere;}
+  .seat .notes .cut{color:var(--drop-ink);font-weight:600;}
+  .seat .notes .flag{color:var(--drop-ink);font-weight:700;}
+
+  .price{text-align:right;display:flex;flex-direction:column;gap:1px;}
+  .price .amt{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.02em;}
+  .price .per{font-size:11px;color:var(--muted);white-space:nowrap;}
+
+  .go{
+    display:flex;align-items:center;gap:6px;white-space:nowrap;
+    font-size:13px;font-weight:600;color:var(--court);
+    border:1px solid var(--court);border-radius:7px;padding:7px 12px;
+  }
+  a.row:hover .go{background:var(--court-soft);}
+
+  .chip{
+    font-size:11px;font-weight:650;font-variant-numeric:tabular-nums;
+    color:var(--court);background:var(--court-soft);
+    border-radius:20px;padding:2px 8px;white-space:nowrap;
+  }
+  .chip.top{color:#3F4A00;background:var(--ball-mark);}
+  :root[data-theme="dark"] .chip.top{color:#132C4D;}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .chip.top{color:#132C4D;}}
+
+  /* ---- price history ---- */
+  .trend{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px;
+  }
+  .trend .legend{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+  .trend .key{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;}
+  .trend .key i{width:11px;height:11px;border-radius:3px;display:inline-block;}
+  .series{display:grid;grid-template-columns:minmax(120px,auto) 1fr auto;align-items:center;gap:16px;}
+  .series + .series{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);}
+  .series .who{display:flex;flex-direction:column;gap:1px;}
+  .series .who .nm{font-size:13px;font-weight:600;}
+  .series .who .sub{font-size:11.5px;color:var(--muted);}
+  .series .spark{min-width:0;}
+  .series .now{text-align:right;display:flex;flex-direction:column;gap:2px;align-items:flex-end;}
+  .series .now .v{font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.02em;}
+  .delta{font-size:11.5px;font-weight:650;font-variant-numeric:tabular-nums;border-radius:20px;padding:2px 8px;white-space:nowrap;}
+  .delta.flat{color:var(--muted);background:var(--surface-2);}
+  .delta.down{color:var(--drop-ink);background:var(--drop-bg);}
+  .delta.up{color:var(--rise-ink);background:var(--rise-bg);}
+  .empty{
+    font-size:12.5px;color:var(--muted);background:var(--surface-2);
+    border:1px dashed var(--line);border-radius:8px;padding:10px 12px;
+  }
+  .spark svg{display:block;width:100%;height:44px;overflow:visible;}
+  @media (max-width:560px){
+    .series{grid-template-columns:1fr auto;}
+    .series .spark{grid-column:1 / -1;order:3;}
+  }
+
+  /* ---- footer ---- */
+  .all{
+    display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+    background:var(--court);color:#fff;text-decoration:none;
+    font-size:14px;font-weight:600;padding:12px 20px;border-radius:8px;
+    border:1px solid var(--court);
+  }
+  .all:hover{filter:brightness(1.08);}
+  .all:focus-visible{outline:2px solid var(--ball-mark);outline-offset:2px;}
+
+  .fine{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 18px;font-size:13px;color:var(--ink-soft);display:flex;flex-direction:column;gap:10px;
+  }
+  .fine strong{color:var(--ink);}
+  .fine p{margin:0;}
+
+  @media (max-width:560px){
+    a.row{grid-template-columns:1fr auto;row-gap:12px;}
+    .go{grid-column:1 / -1;justify-content:center;}
+    .price{text-align:right;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    a.row{transition:none;}
+    a.row:hover{transform:none;}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Session 2 &middot; Night</div>
+    <h1 class="serif">Arthur Ashe Stadium, Aug 30</h1>
+    <p class="sub">Sunday 7:00 PM &middot; 4 tickets seated together &middot; prices are per ticket, all fees included</p>
+    <div class="rule"><span></span></div>
+    <div class="stamp">
+      <span class="dot"></span>
+      <span class="lbl">Prices pulled</span>
+      <span class="val">Tue 18 Aug 2026, 10:42 AM ET</span>
+    </div>
+  </header>
+
+  <div class="banner calm">
+    <span class="tag">Loge up</span>
+    <span class="msg">Loge&rsquo;s floor rose for the first time since tracking began &mdash; Section 218 Row D went from <b>$442</b> to <b>$447</b>. Courtside held at <b>$797</b>. Both moves are under the 5% alert threshold.</span>
+  </div>
+
+  <div class="tiles">
+    <div class="tile">
+      <span class="label">Cheapest Loge</span>
+      <span class="figure">$447 <span class="delta up">&uarr; 1.1%</span></span>
+      <span class="where">Section 218, Row D &middot; Seats 5&ndash;8</span>
+    </div>
+    <div class="tile">
+      <span class="label">Cheapest Courtside</span>
+      <span class="figure">$797 <span class="delta flat">flat</span></span>
+      <span class="where">Section 108, Row X &middot; Seats 3&ndash;6</span>
+    </div>
+    <div class="tile mark">
+      <span class="label">Best value</span>
+      <span class="figure">$585</span>
+      <span class="where">Loge 224, Row B &middot; deal 9.5</span>
+    </div>
+  </div>
+
+  <section>
+    <div class="head">
+      <h2>Price history</h2>
+      <span class="note" id="trend-note">Cheapest seat in each tier, per check</span>
+    </div>
+    <div class="trend">
+      <div class="legend">
+        <span class="key"><i style="background:var(--loge)"></i>Loge</span>
+        <span class="key"><i style="background:var(--cs)"></i>Courtside</span>
+      </div>
+      <div id="trend-body"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>Loge &mdash; cheapest first</h2>
+      <span class="note">Sections 201&ndash;231 &middot; 37 qualifying</span>
+    </div>
+    <div class="rows">
+      <a class="row" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13675215146">
+        <span class="seat"><span class="id">Section 218 <em>Row D</em></span><span class="notes">Clear view &middot; Seats 5&ndash;8 &middot; <span class="flag">up $5 since last check</span></span></span>
+        <span class="price"><span class="amt">$447</span><span class="per">$1,788 for 4</span></span>
+        <span class="go">View seats <span class="chip">8.8</span></span>
+      </a>
+      <a class="row" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13688353627">
+        <span class="seat"><span class="id">Section 215 <em>Row C</em></span><span class="notes">Third row of section &middot; Seats 2&ndash;5</span></span>
+        <span class="price"><span class="amt">$507</span><span class="per">$2,028 for 4</span></span>
+        <span class="go">View seats <span class="chip">9.0</span></span>
+      </a>
+      <a class="row" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13676768816">
+        <span class="seat"><span class="id">Section 216 <em>Row C</em></span><span class="notes">Third row of section &middot; Seats 11&ndash;16</span></span>
+        <span class="price"><span class="amt">$507</span><span class="per">$2,028 for 4</span></span>
+        <span class="go">View seats <span class="chip top">9.3</span></span>
+      </a>
+      <a class="row" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13422741757">
+        <span class="seat"><span class="id">Section 214 <em>Row B</em></span><span class="notes">Clear view &middot; Seats 14&ndash;17</span></span>
+        <span class="price"><span class="amt">$512</span><span class="per">$2,048 for 4</span></span>
+        <span class="go">View seats <span class="chip">8.9</span></span>
+      </a>
+      <a class="row" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13619883905">
+        <span class="seat"><span class="id">Section 218 <em>Row C</em></span><span class="notes">Aisle seat &middot; third row of section</span></span>
+        <span class="price"><span class="amt">$536</span><span class="per">$2,144 for 4</span></span>
+        <span class="go">View seats <span class="chip">8.6</span></span>
+      </a>
+      <a class="row" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13146484744">
+        <span class="seat"><span class="id">Section 227 <em>Row C</em></span><span class="notes">Clear view &middot; Seats 10&ndash;13</span></span>
+        <span class="price"><span class="amt">$571</span><span class="per">$2,284 for 4</span></span>
+        <span class="go">View seats <span class="chip">8.7</span></span>
+      </a>
+      <a class="row best" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13628204396">
+        <span class="seat"><span class="id">Section 224 <em>Row B</em></span><span class="notes">Second row of section &middot; best value on the board</span></span>
+        <span class="price"><span class="amt">$585</span><span class="per">$2,340 for 4</span></span>
+        <span class="go">View seats <span class="chip top">9.5</span></span>
+      </a>
+      <a class="row" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13156089275">
+        <span class="seat"><span class="id">Section 209 <em>Row B</em></span><span class="notes">Clear view</span></span>
+        <span class="price"><span class="amt">$588</span><span class="per">$2,352 for 4</span></span>
+        <span class="go">View seats <span class="chip top">9.2</span></span>
+      </a>
+      <a class="row" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13533605275">
+        <span class="seat"><span class="id">Section 215 <em>Row B</em></span><span class="notes">Second row of section &middot; Seats 5&ndash;8</span></span>
+        <span class="price"><span class="amt">$615</span><span class="per">$2,460 for 4</span></span>
+        <span class="go">View seats <span class="chip">8.7</span></span>
+      </a>
+      <a class="row" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13659161053">
+        <span class="seat"><span class="id">Section 202 <em>Row B</em></span><span class="notes">Aisle seat &middot; second row of section</span></span>
+        <span class="price"><span class="amt">$619</span><span class="per">$2,476 for 4</span></span>
+        <span class="go">View seats <span class="chip">9.0</span></span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>Courtside &mdash; cheapest first</h2>
+      <span class="note">Sections 101&ndash;125 &middot; all 7 qualifying</span>
+    </div>
+    <div class="rows">
+      <a class="row" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13664508579">
+        <span class="seat"><span class="id">Section 108 <em>Row X</em></span><span class="notes">Clear view &middot; Seats 3&ndash;6</span></span>
+        <span class="price"><span class="amt">$797</span><span class="per">$3,188 for 4</span></span>
+        <span class="go">View seats <span class="chip">8.9</span></span>
+      </a>
+      <a class="row" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13706450479">
+        <span class="seat"><span class="id">Section 108 <em>Row W</em></span><span class="notes">Clear view &middot; Seats 9&ndash;12</span></span>
+        <span class="price"><span class="amt">$837</span><span class="per">$3,348 for 4</span></span>
+        <span class="go">View seats <span class="chip">8.8</span></span>
+      </a>
+      <a class="row" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13619639463">
+        <span class="seat"><span class="id">Section 120 <em>Row U</em></span><span class="notes">Clear view &middot; Seats 11&ndash;14</span></span>
+        <span class="price"><span class="amt">$851</span><span class="per">$3,404 for 4</span></span>
+        <span class="go">View seats <span class="chip">8.5</span></span>
+      </a>
+      <a class="row" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13581532585">
+        <span class="seat"><span class="id">Section 118 <em>Row Z</em></span><span class="notes">Aisle seat &middot; highest deal score on the board</span></span>
+        <span class="price"><span class="amt">$857</span><span class="per">$3,428 for 4</span></span>
+        <span class="go">View seats <span class="chip top">9.7</span></span>
+      </a>
+      <a class="row" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13242345170">
+        <span class="seat"><span class="id">Section 122 <em>Row H</em></span><span class="notes">Club Suite &middot; unlimited food and drinks &middot; aisle seat</span></span>
+        <span class="price"><span class="amt">$874</span><span class="per">$3,496 for 4</span></span>
+        <span class="go">View seats <span class="chip">6.9</span></span>
+      </a>
+      <a class="row" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13658728388">
+        <span class="seat"><span class="id">Section 117 <em>Row S</em></span><span class="notes">Clear view &middot; Seats 9&ndash;12</span></span>
+        <span class="price"><span class="amt">$892</span><span class="per">$3,568 for 4</span></span>
+        <span class="go">View seats <span class="chip">8.7</span></span>
+      </a>
+      <a class="row" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13666784181">
+        <span class="seat"><span class="id">Section 107 <em>Row Z</em></span><span class="notes">Clear view &middot; Seats 5&ndash;10</span></span>
+        <span class="price"><span class="amt">$893</span><span class="per">$3,572 for 4</span></span>
+        <span class="go">View seats <span class="chip top">9.4</span></span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>Best value under $800</h2>
+      <span class="note">Ranked by StubHub deal score, not price</span>
+    </div>
+    <div class="rows">
+      <a class="row best" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13628204396">
+        <span class="seat"><span class="id">Loge 224 <em>Row B</em></span><span class="notes">Second row of section</span></span>
+        <span class="price"><span class="amt">$585</span><span class="per">$2,340 for 4</span></span>
+        <span class="go">View seats <span class="chip top">9.5</span></span>
+      </a>
+      <a class="row best" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13676768816">
+        <span class="seat"><span class="id">Loge 216 <em>Row C</em></span><span class="notes">Third row of section &middot; cheapest on this list</span></span>
+        <span class="price"><span class="amt">$507</span><span class="per">$2,028 for 4</span></span>
+        <span class="go">View seats <span class="chip top">9.3</span></span>
+      </a>
+      <a class="row best" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13156089275">
+        <span class="seat"><span class="id">Loge 209 <em>Row B</em></span><span class="notes">Clear view</span></span>
+        <span class="price"><span class="amt">$588</span><span class="per">$2,352 for 4</span></span>
+        <span class="go">View seats <span class="chip top">9.2</span></span>
+      </a>
+      <a class="row best" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13340792930">
+        <span class="seat"><span class="id">Loge 216 <em>Row A</em></span><span class="notes">Front row of section &middot; Seats 9&ndash;12</span></span>
+        <span class="price"><span class="amt">$674</span><span class="per">$2,696 for 4</span></span>
+        <span class="go">View seats <span class="chip top">9.1</span></span>
+      </a>
+      <a class="row best" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13184240971">
+        <span class="seat"><span class="id">Loge 202 <em>Row A</em></span><span class="notes">Front row of section &middot; Seats 5&ndash;12</span></span>
+        <span class="price"><span class="amt">$680</span><span class="per">$2,720 for 4</span></span>
+        <span class="go">View seats <span class="chip top">9.1</span></span>
+      </a>
+      <a class="row best" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;listingId=13688353627">
+        <span class="seat"><span class="id">Loge 215 <em>Row C</em></span><span class="notes">Third row of section &middot; Seats 2&ndash;5</span></span>
+        <span class="price"><span class="amt">$507</span><span class="per">$2,028 for 4</span></span>
+        <span class="go">View seats <span class="chip">9.0</span></span>
+      </a>
+    </div>
+  </section>
+
+  <a class="all" href="https://www.stubhub.com/us-open-tennis-flushing-tickets-8-30-2026/event/159351052/?quantity=4&amp;sortBy=price">See all listings on StubHub &rarr;</a>
+
+  <div class="fine">
+    <p><strong>What is on this board.</strong> Listings that seat 4 together in Loge or Courtside at $1,500 or less per ticket, all fees included &mdash; 44 found on this check, 37 Loge and 7 Courtside, with the cheapest of each tier shown. Wheelchair-accessible listings are excluded. Promenade is excluded.</p>
+    <p><strong>Prices are verified against the live page.</strong> Every figure here is the number StubHub itself returns for a quantity of 4, read straight from the live listing data and cross-checked by script before publishing. Every link opens at quantity 4, so you land on the same four seats at the same price shown here.</p>
+    <p><strong>Coverage caveat.</strong> 160 of roughly 222 listings loaded before the paging limit. Everything loaded is priced at or below $908, so the cheapest figure in each tier is definitive &mdash; but there may be further qualifying listings between $908 and the $1,500 ceiling that are not in the count of 43.</p>
+    <p><strong>Read of the market.</strong> Loge&rsquo;s floor ticked up for the first time in four checks &mdash; $442 to $447 &mdash; while Courtside held at $797. Section 122 Row Q sold, leaving seven qualifying Courtside listings. The gap between tiers is $350 per ticket, and every best-value listing is still Loge.</p>
+    <p><strong>Prices pulled Tuesday 18 Aug 2026 at 10:42 AM ET.</strong> If that stamp is not from the last hour or so, this board did not refresh and the prices may be out of date &mdash; check StubHub directly rather than trusting them. Inventory moves &mdash; confirm on StubHub before buying.</p>
+  </div>
+
+</div>
+
+<script>
+/* One entry per check. The scheduled task appends a reading and republishes;
+   everything below redraws from this array alone. */
+const READINGS = [
+  {date:"2026-08-17", label:"Aug 17, 3:35 PM", loge:442, loge_seat:"218 D", cs:851, cs_seat:"120 U"},
+  {date:"2026-08-17", label:"Aug 17, 6:02 PM", loge:442, loge_seat:"218 D", cs:797, cs_seat:"108 X"},
+  {date:"2026-08-17", label:"Aug 17, 9:16 PM", loge:442, loge_seat:"218 D", cs:797, cs_seat:"108 X"},
+  {date:"2026-08-18", label:"Aug 18, 10:42 AM", loge:447, loge_seat:"218 D", cs:797, cs_seat:"108 X"}
+];
+
+(function(){
+  const body = document.getElementById('trend-body');
+  const note = document.getElementById('trend-note');
+  const SERIES = [
+    {key:'loge', name:'Loge',      seatKey:'loge_seat', color:'var(--loge)'},
+    {key:'cs',   name:'Courtside', seatKey:'cs_seat',   color:'var(--cs)'}
+  ];
+
+  const money = n => '$' + n.toLocaleString('en-US');
+
+  function deltaChip(pts){
+    if (pts.length < 2) return '<span class="delta flat">first reading</span>';
+    const a = pts[pts.length-2], b = pts[pts.length-1];
+    const pct = ((b - a) / a) * 100;
+    if (Math.abs(pct) < 0.5) return '<span class="delta flat">flat</span>';
+    const cls = pct < 0 ? 'down' : 'up';
+    const arrow = pct < 0 ? '↓' : '↑';
+    return '<span class="delta ' + cls + '">' + arrow + ' ' + Math.abs(pct).toFixed(1) + '%</span>';
+  }
+
+  function spark(pts, color, labels){
+    const W = 240, H = 44, PAD = 6;
+    if (pts.length < 2){
+      // A single point is not a trend. Show the point, not an invented line.
+      return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Awaiting a second reading">'
+        + '<line x1="0" y1="' + (H/2) + '" x2="' + W + '" y2="' + (H/2) + '" stroke="var(--grid)" stroke-width="1" stroke-dasharray="3 4"/>'
+        + '<circle cx="' + PAD + '" cy="' + (H/2) + '" r="4.5" fill="' + color + '"/>'
+        + '</svg>';
+    }
+    const min = Math.min.apply(null, pts), max = Math.max.apply(null, pts);
+    const span = (max - min) || 1;
+    const flat = (max - min) === 0;
+    const x = i => PAD + (i * (W - PAD*2)) / (pts.length - 1);
+    // A flat series has no range to scale into; pin it to the middle rather than the top.
+    const y = v => flat ? H/2 : PAD + (H - PAD*2) * (1 - (v - min) / span);
+    const d = pts.map((v,i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' ');
+    let dots = '';
+    pts.forEach(function(v,i){
+      const last = i === pts.length - 1;
+      dots += '<circle cx="' + x(i).toFixed(1) + '" cy="' + y(v).toFixed(1) + '" r="' + (last ? 4.5 : 3) + '"'
+           + ' fill="' + (last ? color : 'var(--surface)') + '" stroke="' + color + '" stroke-width="2">'
+           + '<title>' + labels[i] + ': ' + money(v) + '</title></circle>';
+    });
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" role="img" aria-label="Price trend">'
+      + '<path d="' + d + '" fill="none" stroke="' + color + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>'
+      + dots + '</svg>';
+  }
+
+  const labels = READINGS.map(r => r.label || r.date);
+  let html = '';
+  SERIES.forEach(function(s){
+    const pts = READINGS.map(r => r[s.key]);
+    const latest = READINGS[READINGS.length-1];
+    html += '<div class="series">'
+      +   '<span class="who"><span class="nm">' + s.name + '</span>'
+      +     '<span class="sub">Section ' + latest[s.seatKey] + '</span></span>'
+      +   '<span class="spark">' + spark(pts, s.color, labels) + '</span>'
+      +   '<span class="now"><span class="v">' + money(pts[pts.length-1]) + '</span>'
+      +     deltaChip(pts) + '</span>'
+      + '</div>';
+  });
+
+  if (READINGS.length < 2){
+    html += '<p class="empty">Tracking starts here. The line fills in from the next check &mdash; '
+         +  'each one adds a point, so you can see whether prices are climbing toward the match or easing off.</p>';
+    note.textContent = '1 reading so far';
+  } else {
+    const first = READINGS[0], last = READINGS[READINGS.length-1];
+    const moveLoge = ((last.loge - first.loge) / first.loge) * 100;
+    const moveCs   = ((last.cs   - first.cs)   / first.cs)   * 100;
+    const fmt = n => (n >= 0 ? '+' : '') + n.toFixed(1) + '%';
+    note.textContent = READINGS.length + ' readings since ' + labels[0];
+    html += '<p class="empty">Since tracking began on ' + labels[0] + ', cheapest Loge has moved '
+         +  fmt(moveLoge) + ' and cheapest Courtside ' + fmt(moveCs)
+         +  '. Hover any point for its time and price.</p>';
+  }
+  body.innerHTML = html;
+})();
+</script>
+
+
+</body>
+</html>
